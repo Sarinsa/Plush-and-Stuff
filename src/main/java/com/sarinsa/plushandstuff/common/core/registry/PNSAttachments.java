@@ -12,13 +12,12 @@ public final class PNSAttachments {
     
     public static final DeferredRegister<AttachmentType<?>> REGISTRY = DeferredRegister.create( NeoForgeRegistries.ATTACHMENT_TYPES, PlushStuff.MODID );
     
-    
-    private static final Supplier<AttachmentType<KnownPlushiesHandler>> KNOWN_PLUSHIES = REGISTRY.register(
-            "known_plushies", () -> AttachmentType.serializable( KnownPlushiesHandler::new )
-                    .copyOnDeath()
-                    .sync( new KnownPlushiesHandler.SyncHandler() )
-                    .build() );
-    
+    public static final Supplier<AttachmentType<KnownPlushiesHandler>> KNOWN_PLUSHIES = REGISTRY.register(
+            "known_plushies", () -> AttachmentType.builder( () -> new KnownPlushiesHandler() )
+                    .serialize( KnownPlushiesHandler.DIRECT_CODEC.fieldOf( "known_plushies" ) )
+                    .sync( KnownPlushiesHandler.STREAM_CODEC )
+                    .build()
+    );
     
     // Utility class
     private PNSAttachments() { }

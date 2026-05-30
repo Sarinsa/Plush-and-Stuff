@@ -1,9 +1,9 @@
 package com.sarinsa.plushandstuff.common.core.registry;
 
 import com.mojang.serialization.MapCodec;
-import com.sarinsa.plushandstuff.common.color_provider.ColorProvider;
 import com.sarinsa.plushandstuff.common.color_provider.ColorProviderType;
 import com.sarinsa.plushandstuff.common.color_provider.DyeColorProvider;
+import com.sarinsa.plushandstuff.common.color_provider.IColorProvider;
 import com.sarinsa.plushandstuff.common.color_provider.IntColorProvider;
 import com.sarinsa.plushandstuff.common.core.PlushStuff;
 import net.minecraft.core.Registry;
@@ -16,7 +16,7 @@ import java.util.function.Supplier;
 
 public class PNSColorProviders {
     
-    public static final ResourceKey<Registry<ColorProviderType<?>>> REGISTRY_KEY = ResourceKey.createRegistryKey( PlushStuff.id( "color_providers" ) );
+    public static final ResourceKey<Registry<ColorProviderType<?>>> REGISTRY_KEY = ResourceKey.createRegistryKey( PlushStuff.id( "color_provider" ) );
     public static final DeferredRegister<ColorProviderType<?>> REGISTRY = DeferredRegister.create( REGISTRY_KEY, PlushStuff.MODID );
     
     public static Registry<ColorProviderType<?>> BASE_REGISTRY;
@@ -26,7 +26,7 @@ public class PNSColorProviders {
     public static final Supplier<ColorProviderType<IntColorProvider>> INTEGER = REGISTRY.register( "int", of( IntColorProvider.CODEC ) );
     
     
-    private static <T extends ColorProvider> Supplier<ColorProviderType<T>> of( MapCodec<T> codec ) {
+    private static <T extends IColorProvider> Supplier<ColorProviderType<T>> of( MapCodec<T> codec ) {
         return () -> () -> codec;
     }
     

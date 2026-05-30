@@ -1,6 +1,7 @@
 package com.sarinsa.plushandstuff.client;
 
 import com.sarinsa.plushandstuff.common.core.PlushStuff;
+import com.sarinsa.plushandstuff.common.core.registry.PNSPlushieTypes;
 import com.sarinsa.plushandstuff.common.core.registry.PNSSewingMaterials;
 import com.sarinsa.plushandstuff.datagen.recipe.ModRecipeProvider;
 import net.minecraft.core.RegistrySetBuilder;
@@ -37,7 +38,8 @@ public class PlushStuffClient {
         final PackOutput packOutput = event.getGenerator().getPackOutput();
         
         final RegistrySetBuilder regBuilder = new RegistrySetBuilder()
-                .add( PNSSewingMaterials.REGISTRY_KEY, PNSSewingMaterials::bootstrap );
+                .add( PNSSewingMaterials.REGISTRY_KEY, PNSSewingMaterials::bootstrap )
+                .add( PNSPlushieTypes.REGISTRY_KEY, PNSPlushieTypes::bootstrap );
         
         event.addProvider( new DatapackBuiltinEntriesProvider( packOutput, event.getLookupProvider(), regBuilder, Set.of( PlushStuff.MODID ) ) );
         event.createProvider( ModRecipeProvider.Runner::new );

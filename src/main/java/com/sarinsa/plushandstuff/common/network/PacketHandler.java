@@ -1,7 +1,10 @@
 package com.sarinsa.plushandstuff.common.network;
 
+import com.sarinsa.plushandstuff.common.network.message.SketchedEntityMessage;
+import com.sarinsa.plushandstuff.common.network.work.CommonWork;
 import net.neoforged.bus.api.SubscribeEvent;
 import net.neoforged.neoforge.network.event.RegisterPayloadHandlersEvent;
+import net.neoforged.neoforge.network.registration.PayloadRegistrar;
 
 public class PacketHandler {
     
@@ -11,6 +14,8 @@ public class PacketHandler {
     
     @SubscribeEvent
     public static void register( RegisterPayloadHandlersEvent event ) {
-        // final PayloadRegistrar registrar = event.registrar( VERSION );
+        final PayloadRegistrar registrar = event.registrar( VERSION );
+        
+        registrar.playToServer( SketchedEntityMessage.TYPE, SketchedEntityMessage.STREAM_CODEC, CommonWork::handleSketchedEntityMessage );
     }
 }

@@ -3,7 +3,7 @@ package com.sarinsa.plushandstuff.common.recipe;
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.MapCodec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sarinsa.plushandstuff.common.color_provider.ColorProvider;
+import com.sarinsa.plushandstuff.common.color_provider.IColorProvider;
 import com.sarinsa.plushandstuff.common.core.registry.PNSRecipes;
 import com.sarinsa.plushandstuff.common.core.registry.PNSSewingMaterials;
 import com.sarinsa.plushandstuff.common.sewing.SewingMaterial;
@@ -82,7 +82,7 @@ public class SewingRecipe implements Recipe<VarargItemInput> {
             return false;
         }
         final Registry<SewingMaterial> registry = level.registryAccess().lookupOrThrow( PNSSewingMaterials.REGISTRY_KEY );
-        final Map<Item, ColorProvider> map = registry.stream()
+        final Map<Item, IColorProvider> map = registry.stream()
                 .collect( Collectors.toMap( ( m ) -> m.item().value(), SewingMaterial::colorProvider ) );
         
         // Make sure every input is a recognized item in a registered SewingMaterial
@@ -115,7 +115,7 @@ public class SewingRecipe implements Recipe<VarargItemInput> {
     /** @return This recipe's serializer. */
     @Override
     public RecipeSerializer<? extends Recipe<VarargItemInput>> getSerializer() {
-        return SERIALIZER;
+        return PNSRecipes.SEWING_SERIALIZER.get();
     }
     
     /** @return This recipe's recipe type. */

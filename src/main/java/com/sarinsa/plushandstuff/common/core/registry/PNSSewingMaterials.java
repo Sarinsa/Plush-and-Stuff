@@ -12,22 +12,11 @@ import net.minecraft.resources.Identifier;
 import net.minecraft.resources.ResourceKey;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
-import net.neoforged.bus.api.IEventBus;
-import net.neoforged.fml.ModContainer;
-import net.neoforged.neoforge.registries.DataPackRegistryEvent;
 
 public class PNSSewingMaterials {
     
-    public static final ResourceKey<Registry<SewingMaterial>> REGISTRY_KEY = ResourceKey.createRegistryKey( PlushStuff.id( "sewing_materials" ) );
+    public static final ResourceKey<Registry<SewingMaterial>> REGISTRY_KEY = ResourceKey.createRegistryKey( PlushStuff.id( "sewing_material" ) );
     
-    /**
-     * Called when new datapack registries can be created.
-     *
-     * @see com.sarinsa.plushandstuff.common.core.PlushStuff#PlushStuff(IEventBus, ModContainer)
-     */
-    public static void onNewRegistry( DataPackRegistryEvent.NewRegistry event ) {
-        event.dataPackRegistry( REGISTRY_KEY, SewingMaterial.DIRECT_CODEC );
-    }
     
     /** Called during data gen to generate default registry entries. */
     public static void bootstrap( BootstrapContext<SewingMaterial> ctx ) {

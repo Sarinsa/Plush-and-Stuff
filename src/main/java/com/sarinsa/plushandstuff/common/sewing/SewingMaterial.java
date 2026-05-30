@@ -2,16 +2,16 @@ package com.sarinsa.plushandstuff.common.sewing;
 
 import com.mojang.serialization.Codec;
 import com.mojang.serialization.codecs.RecordCodecBuilder;
-import com.sarinsa.plushandstuff.common.color_provider.ColorProvider;
 import com.sarinsa.plushandstuff.common.color_provider.ColorProviderType;
 import com.sarinsa.plushandstuff.common.color_provider.DyeColorProvider;
+import com.sarinsa.plushandstuff.common.color_provider.IColorProvider;
 import com.sarinsa.plushandstuff.common.color_provider.IntColorProvider;
 import net.minecraft.core.Holder;
 import net.minecraft.world.item.DyeColor;
 import net.minecraft.world.item.Item;
 import org.jetbrains.annotations.ApiStatus;
 
-public record SewingMaterial(Holder<Item> item, ColorProvider colorProvider) {
+public record SewingMaterial(Holder<Item> item, IColorProvider colorProvider) {
     
     public static final Codec<SewingMaterial> DIRECT_CODEC = RecordCodecBuilder.create(
             instance -> instance.group(
