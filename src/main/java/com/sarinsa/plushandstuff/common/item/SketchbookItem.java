@@ -4,10 +4,11 @@ import com.sarinsa.plushandstuff.client.ClientUtil;
 import com.sarinsa.plushandstuff.common.attachment.player.KnownPlushiesHandler;
 import com.sarinsa.plushandstuff.common.core.registry.PNSAttachments;
 import com.sarinsa.plushandstuff.common.network.NetworkHelper;
-import net.minecraft.sounds.SoundEvents;
+import com.sarinsa.plushandstuff.common.plushie.PlushieType;
 import net.minecraft.world.InteractionHand;
 import net.minecraft.world.InteractionResult;
 import net.minecraft.world.entity.Entity;
+import net.minecraft.world.entity.EntityType;
 import net.minecraft.world.entity.LivingEntity;
 import net.minecraft.world.entity.player.Player;
 import net.minecraft.world.item.Item;
@@ -33,12 +34,11 @@ public class SketchbookItem extends Item {
             final Entity observedEntity = ClientUtil.getLookAtEntity( 10.0 );
             
             if( observedEntity instanceof LivingEntity ) {
+                final EntityType<?> entityType = observedEntity.getType();
                 final KnownPlushiesHandler handler = player.getData( PNSAttachments.KNOWN_PLUSHIES );
                 
-                if( !handler.knowsEntity( observedEntity.getType() ) ) {
-                    NetworkHelper.sendSketchEntityUpdate( player, observedEntity.getType() );
-                    player.playSound( SoundEvents.BOOK_PAGE_TURN );
-                    
+                if( PlushieType.isPlushieEntity( level.registryAccess(), entityType ) && !handler.knowsEntity( entityType ) ) {
+                    NetworkHelper.sendSketchEntityUpdate( player, entityType );
                     return InteractionResult.SUCCESS;
                 }
             }

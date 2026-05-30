@@ -39,7 +39,8 @@ public class KnownPlushiesHandler {
     private final List<PlushieType> knownPlushies;
     
     public KnownPlushiesHandler( List<PlushieType> knownPlushies ) {
-        this.knownPlushies = knownPlushies;
+        // Ensure we have a modifiable list
+        this.knownPlushies = new ArrayList<>( knownPlushies );
     }
     
     public KnownPlushiesHandler() {
@@ -72,7 +73,7 @@ public class KnownPlushiesHandler {
         return added;
     }
     
-    /** @return True if this handler's internal map contains the specified entity type as a key. */
+    /** @return True if this handler's internal list contains the specified entity type as a key. */
     public boolean knowsEntity( EntityType<?> entityType ) {
         for( PlushieType plushieType : knownPlushies ) {
             if( plushieType.getEntityType() == entityType )

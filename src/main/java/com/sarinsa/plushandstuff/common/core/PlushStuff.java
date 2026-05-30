@@ -26,9 +26,13 @@ public final class PlushStuff {
         modEventBus.addListener( this::onNewDatapackRegistry );
         modEventBus.register( PacketHandler.class );
         
+        PNSBlocks.REGISTRY.register( modEventBus );
         PNSItems.REGISTRY.register( modEventBus );
+        PNSBlockEntities.REGISTRY.register( modEventBus );
         PNSTriggers.REGISTRY.register( modEventBus );
+        PNSMenuTypes.REGISTRY.register( modEventBus );
         PNSColorProviders.REGISTRY.register( modEventBus );
+        PNSAttachments.REGISTRY.register( modEventBus );
         PNSRecipes.register( modEventBus );
     }
     
@@ -38,7 +42,7 @@ public final class PlushStuff {
     /** Called when new data-registries can be created. */
     private void onNewDatapackRegistry( DataPackRegistryEvent.NewRegistry event ) {
         event.dataPackRegistry( PNSSewingMaterials.REGISTRY_KEY, SewingMaterial.DIRECT_CODEC );
-        event.dataPackRegistry( PNSPlushieTypes.REGISTRY_KEY, PlushieType.DIRECT_CODEC );
+        event.dataPackRegistry( PNSPlushieTypes.REGISTRY_KEY, PlushieType.DIRECT_CODEC, PlushieType.DIRECT_CODEC );
     }
     
     
