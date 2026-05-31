@@ -3,6 +3,7 @@ package com.sarinsa.plushandstuff.client;
 import com.sarinsa.plushandstuff.common.core.PlushStuff;
 import com.sarinsa.plushandstuff.common.core.registry.PNSPlushieTypes;
 import com.sarinsa.plushandstuff.common.core.registry.PNSSewingMaterials;
+import com.sarinsa.plushandstuff.datagen.lang.ModLangProvider;
 import com.sarinsa.plushandstuff.datagen.model.ModModelProvider;
 import com.sarinsa.plushandstuff.datagen.recipe.ModRecipeProvider;
 import net.minecraft.core.RegistrySetBuilder;
@@ -44,6 +45,7 @@ public class PlushStuffClient {
         
         event.addProvider( new DatapackBuiltinEntriesProvider( packOutput, event.getLookupProvider(), regBuilder, Set.of( PlushStuff.MODID ) ) );
         event.addProvider( new ModModelProvider( packOutput ) );
+        event.addProvider( new ModLangProvider( packOutput ) );
         event.createProvider( ModRecipeProvider.Runner::new );
     }
 }
